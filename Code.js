@@ -142,7 +142,86 @@ function fillMaterialRow_(row, item) {
     CATALOG_NUMBER: item.catalog,
     VENDOR_CODE: item.vendor,
     ITEM_DESCRIPTION: item.description,
-    UNIT_PRICE: money_(item.price),
+    UNIT_PRICE: '
+    UNIT_CODE: item.unit,
+    EXTENDED_PRICE: '
+  };
+  Object.entries(fields).forEach(([key, value]) => {
+    const pattern = '\\{\\{' + key + '\\}\\}';
+    for (let i = 0; i < row.getNumCells(); i++) {
+      row.getCell(i).replaceText(pattern, String(value));
+    }
+  });
+}
+
+function money_(n) {
+  return Number(n).toFixed(2);
+}
+
+function invoiceDate_(value) {
+  if (value instanceof Date && !isNaN(value.getTime())) return new Date(value);
+  const m = String(value).trim().match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if (!m) throw new Error('B2 must contain a date in MM/DD/YYYY format.');
+  const month = Number(m[1]), day = Number(m[2]), year = Number(m[3]);
+  const date = new Date(year, month - 1, day, 12);
+  if (date.getFullYear() !== year || date.getMonth() !== month - 1 || date.getDate() !== day) {
+    throw new Error('B2 contains an invalid date.');
+  }
+  return date;
+}
+ + money_(item.price),
+    UNIT_CODE: item.unit,
+    EXTENDED_PRICE: money_(item.extended)
+  };
+  Object.entries(fields).forEach(([key, value]) => {
+    const pattern = '\\{\\{' + key + '\\}\\}';
+    for (let i = 0; i < row.getNumCells(); i++) {
+      row.getCell(i).replaceText(pattern, String(value));
+    }
+  });
+}
+
+function money_(n) {
+  return Number(n).toFixed(2);
+}
+
+function invoiceDate_(value) {
+  if (value instanceof Date && !isNaN(value.getTime())) return new Date(value);
+  const m = String(value).trim().match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if (!m) throw new Error('B2 must contain a date in MM/DD/YYYY format.');
+  const month = Number(m[1]), day = Number(m[2]), year = Number(m[3]);
+  const date = new Date(year, month - 1, day, 12);
+  if (date.getFullYear() !== year || date.getMonth() !== month - 1 || date.getDate() !== day) {
+    throw new Error('B2 contains an invalid date.');
+  }
+  return date;
+}
+ + money_(item.extended)
+  };
+  Object.entries(fields).forEach(([key, value]) => {
+    const pattern = '\\{\\{' + key + '\\}\\}';
+    for (let i = 0; i < row.getNumCells(); i++) {
+      row.getCell(i).replaceText(pattern, String(value));
+    }
+  });
+}
+
+function money_(n) {
+  return Number(n).toFixed(2);
+}
+
+function invoiceDate_(value) {
+  if (value instanceof Date && !isNaN(value.getTime())) return new Date(value);
+  const m = String(value).trim().match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if (!m) throw new Error('B2 must contain a date in MM/DD/YYYY format.');
+  const month = Number(m[1]), day = Number(m[2]), year = Number(m[3]);
+  const date = new Date(year, month - 1, day, 12);
+  if (date.getFullYear() !== year || date.getMonth() !== month - 1 || date.getDate() !== day) {
+    throw new Error('B2 contains an invalid date.');
+  }
+  return date;
+}
+ + money_(item.price),
     UNIT_CODE: item.unit,
     EXTENDED_PRICE: money_(item.extended)
   };
