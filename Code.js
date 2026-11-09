@@ -43,7 +43,10 @@ function createInvoice_() {
   const orderDate = invoiceDate_(dateValue);
   const dueDate = new Date(orderDate);
   dueDate.setDate(dueDate.getDate() + INVOICE_CONFIG.DUE_DAYS);
-  const tz = ss.getSpreadsheetTimeZone();
+  const spreadsheetTimeZone = ss.getSpreadsheetTimeZone();
+  const tz = (typeof spreadsheetTimeZone === 'string' && spreadsheetTimeZone.trim())
+    ? spreadsheetTimeZone
+    : Session.getScriptTimeZone() || 'America/Chicago';
   const dateText = value => Utilities.formatDate(value, tz, 'MM/dd/yyyy');
 
   const count = sheet.getLastRow() - INVOICE_CONFIG.FIRST_ITEM_ROW + 1;
