@@ -142,9 +142,9 @@ function fillMaterialRow_(row, item) {
     CATALOG_NUMBER: item.catalog,
     VENDOR_CODE: item.vendor,
     ITEM_DESCRIPTION: item.description,
-    UNIT_PRICE: elliottPrice_(item.price),
+    UNIT_PRICE: money_(item.price),
     UNIT_CODE: item.unit,
-    EXTENDED_PRICE: elliottPrice_(item.extended)
+    EXTENDED_PRICE: money_(item.extended)
   };
   Object.entries(fields).forEach(([key, value]) => {
     const pattern = '\\{\\{' + key + '\\}\\}';
