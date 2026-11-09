@@ -154,6 +154,11 @@ function fillMaterialRow_(row, item) {
   });
 }
 
+function elliottPrice_(n) {
+  // Match the source Elliott invoice's dollar-sign spacing.
+  return '$       ' + money_(n);
+}
+
 function money_(n) {
   return Number(n).toFixed(2);
 }
