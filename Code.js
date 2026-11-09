@@ -157,7 +157,7 @@ function money_(n) {
 
 function invoiceDate_(value) {
   if (value instanceof Date && !isNaN(value.getTime())) return new Date(value);
-  const m = String(value).trim().match(/^(\\d{1,2})\\/(\\d{1,2})\\/(\\d{4})$/);
+  const m = String(value).trim().match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
   if (!m) throw new Error('B2 must contain a date in MM/DD/YYYY format.');
   const month = Number(m[1]), day = Number(m[2]), year = Number(m[3]);
   const date = new Date(year, month - 1, day, 12);
