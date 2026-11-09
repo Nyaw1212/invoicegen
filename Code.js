@@ -52,7 +52,7 @@ function createInvoice_() {
   const count = sheet.getLastRow() - INVOICE_CONFIG.FIRST_ITEM_ROW + 1;
   if (count <= 0) throw new Error('Add an item in row 9.');
 
-  const sourceRows = sheet.getRange(INVOICE_CONFIG.FIRST_ITEM_ROW, 1, count, 9).getValues();
+  const sourceRows = sheet.getRange(INVOICE_CONFIG.FIRST_ITEM_ROW, 1, count, 8).getValues();
   const items = sourceRows.map((r, offset) => ({row: r, sheetRow: offset + INVOICE_CONFIG.FIRST_ITEM_ROW}))
     .filter(({row}) => row.slice(0, 8).some(v => v !== '' && v !== null))
     .map(({row, sheetRow}) => {
